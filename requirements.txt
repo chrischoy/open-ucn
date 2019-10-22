@@ -1,0 +1,14 @@
+numpy
+# pytorch  # for anaconda, please refer to pytorch.org for installation
+scipy
+matplotlib
+tensorboardX
+easydict
+joblib
+
+opencv-contrib-python==3.4.2.17
+h5py
+tqdm
+
+# 2D data loader
+# cyvlfeat  # conda install -c menpo cyvlfeat
