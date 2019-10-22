@@ -1,25 +1,15 @@
-# -*- coding: future_fstrings -*-
 import os
 import os.path as osp
-import gc
 import logging
 import numpy as np
 import json
 
 import torch
 import torch.optim as optim
-import torch.nn.functional as F
 from tensorboardX import SummaryWriter
 
 from model import load_model
-import util.transform_estimation as te
-from lib.loss import pts_loss2
-from lib.util import ensure_dir
-from lib.util_reg import _hash
-from lib.timer import Timer, AverageMeter
-from lib.eval import find_nn_gpu, pdist
-
-import MinkowskiEngine as ME
+from util.file import ensure_dir
 
 
 class Trainer:

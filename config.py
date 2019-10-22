@@ -79,7 +79,7 @@ misc_arg.add_argument('--test_num_workers', type=int, default=2)
 
 # Dataset specific configs
 data_arg = add_argument_group('Data')
-data_arg.add_argument('--dataset', type=str, default='TotalPairDataset07')
+data_arg.add_argument('--dataset', type=str, default='YFCC100MDataset')
 data_arg = add_argument_group('2D')
 data_arg.add_argument(
     '--obj_num_kp',

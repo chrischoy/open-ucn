@@ -4,7 +4,6 @@ scipy
 matplotlib
 tensorboardX
 easydict
-joblib
 
 opencv-contrib-python==3.4.2.17
 h5py

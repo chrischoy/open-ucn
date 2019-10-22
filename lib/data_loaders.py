@@ -6,10 +6,40 @@ import numpy as np
 
 import torch
 import torch.utils.data
+from torch.utils.data.sampler import Sampler
 
-from lib.util import read_txt
+from util.file import read_txt
 import lib.util_2d as util_2d
-from lib.util_data import InfSampler
+
+
+class InfSampler(Sampler):
+  """Samples elements randomly, without replacement.
+
+    Arguments:
+        data_source (Dataset): dataset to sample from
+    """
+
+  def __init__(self, data_source, shuffle=False):
+    self.data_source = data_source
+    self.shuffle = shuffle
+    self.reset_permutation()
+
+  def reset_permutation(self):
+    perm = len(self.data_source)
+    if self.shuffle:
+      perm = torch.randperm(perm)
+    self._perm = perm.tolist()
+
+  def __iter__(self):
+    return self
+
+  def __next__(self):
+    if len(self._perm) == 0:
+      self.reset_permutation()
+    return self._perm.pop()
+
+  def __len__(self):
+    return len(self.data_source)
 
 
 class CollationFunctionFactory:
@@ -167,7 +197,6 @@ class YFCC100MDataset(Base2DDataset):
         'labels': labels,
         'img0': img0,
         'img1': img1,
-        'E': E,
     }
 
 

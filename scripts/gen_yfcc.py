@@ -5,13 +5,10 @@ import logging
 from pathlib import Path
 import sys
 
-import open3d
-import cv2
 import numpy as np
-from joblib import Parallel, delayed
 from tqdm import tqdm
 
-from lib.util import read_txt, random_sample
+from util.file import read_txt, random_sample
 from lib.util_2d import serialize_calibration
 from util.file import get_folder_list
 
