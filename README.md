@@ -59,30 +59,35 @@ Feel free to contribute to the model zoo by submitting your weights and the arch
 
 The First Fully Convolutional Features for 2D Correspondences
 
+```
 @incollection{UCN2016,
     title = {Universal Correspondence Network},
     author = {Choy, Christopher B and Gwak, JunYoung and Savarese, Silvio and Chandraker, Manmohan},
     booktitle = {Advances in Neural Information Processing Systems 29},
     year = {2016},
 }
+```
 
 Fully Convolutional Metric Learning and Hardest Contrastive Loss
 
+```
 @inproceedings{FCGF2019,
     author = {Christopher Choy and Jaesik Park and Vladlen Koltun},
     title = {Fully Convolutional Geometric Features},
     booktitle = {ICCV},
     year = {2019},
 }
+```
 
-Opensource Pytorch Implementation
+Open-source Pytorch Implementation
 
+```
 @misc{
     author = {Christopher Choy and Junha Lee},
     title = {Open Universal Correspondence Network},
     year = {2019},
 }
-
+```
 
 ## License
 

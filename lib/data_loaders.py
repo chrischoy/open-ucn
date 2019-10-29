@@ -92,6 +92,8 @@ class Base2DDataset(torch.utils.data.Dataset):
     self.manual_seed = manual_seed
     self.config = config
     self.config_root = config.root_dir
+    assert os.path.exists(config.data_dir_raw)
+    assert os.path.exists(config.data_dir_processed)
     self.source_dir = config.data_dir_raw
     self.target_dir = config.data_dir_processed
     self.quantization_size = config.quantization_size

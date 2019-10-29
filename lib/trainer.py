@@ -8,7 +8,6 @@ import torch
 import torch.optim as optim
 from tensorboardX import SummaryWriter
 
-from model import load_model
 from util.file import ensure_dir
 
 
@@ -63,31 +62,6 @@ class Trainer:
 
     self.initialize_optimiser_and_scheduler()
     self.resume()
-
-  def initialize_model(self):
-    config = self.config
-    num_feats = 0
-    if config.use_color:
-      num_feats += 3
-    num_feats = max(1, num_feats)
-
-    # Model initialization
-    Model = load_model(config.model)
-    model = Model(
-        num_feats,
-        config.model_n_out,
-        bn_momentum=config.bn_momentum,
-        normalize_feature=config.normalize_feature)
-
-    if config.weights:
-      logging.info("=> loading checkpoint '{}'".format(config.weights))
-      checkpoint = torch.load(config.weights)
-      model.load_state_dict(checkpoint['state_dict'])
-      logging.info("=> Loaded model weights from checkpoint '{}'".format(
-          config.weights))
-
-    self.model = model.to(self.device)
-    logging.info(model)
 
   def initialize_optimiser_and_scheduler(self):
     config = self.config

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from model.img_blocks import get_block
+from model.blocks import get_block
 
 
 def get_norm(norm_type, num_features, bn_momentum=0.1):

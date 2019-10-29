@@ -6,7 +6,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from model.img_resunet import load_model
+from model.resunet import load_model
 from lib.timer import Timer, AverageMeter
 from lib.eval import find_nn_gpu, pdist
 from lib.trainer import Trainer
@@ -338,7 +338,8 @@ class UCNContrastiveLossTrainer(UCNTrainer):
         torch.cuda.empty_cache()
         # visualize_image_correspondence(input_dict['img0'][batch_idx, 0].numpy() + 0.5,
         #                                input_dict['img1'][batch_idx, 0].numpy() + 0.5,
-        #                                F0[batch_idx], F1[batch_idx], self.config)
+        #                                F0[batch_idx], F1[batch_idx], curr_iter,
+        #                                self.config)
 
       num_data += 1
 

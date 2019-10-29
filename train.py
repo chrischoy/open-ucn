@@ -4,7 +4,7 @@ import logging
 import torch
 from easydict import EasyDict as edict
 
-from lib.all_data_loaders import make_data_loader
+from lib.data_loaders import make_data_loader
 from config import get_config
 
 from lib.ucn_trainer import UCNHardestContrastiveLossTrainer

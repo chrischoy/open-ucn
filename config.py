@@ -19,7 +19,7 @@ logging_arg = add_argument_group('Logging')
 logging_arg.add_argument('--out_dir', type=str, default='outputs')
 
 trainer_arg = add_argument_group('Trainer')
-trainer_arg.add_argument('--trainer', type=str, default='ContrastiveLossTrainer')
+trainer_arg.add_argument('--trainer', type=str, default='HardestContrastiveLossTrainer')
 trainer_arg.add_argument('--save_freq_epoch', type=int, default=1)
 trainer_arg.add_argument('--batch_size', type=int, default=4)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
