@@ -10,7 +10,6 @@ from util.file import ensure_dir
 def visualize_image_correspondence(img0, img1, F0, F1, filename, config):
   mode = 'gpu-all'
   use_stability_test = True
-  # Harris is shit
   keypoint = 'sift'
   if keypoint == 'sift':
     sift = cv2.xfeatures2d.SIFT_create(
@@ -26,13 +25,6 @@ def visualize_image_correspondence(img0, img1, F0, F1, filename, config):
     xy_kp1 = np.floor(np.array([k.pt for k in kp1]).T)
     x0, y0 = xy_kp0[0], xy_kp0[1]
     x1, y1 = xy_kp1[0], xy_kp1[1]
-  elif keypoint == 'harris':
-    dst0 = cv2.cornerHarris(img0, 2, 3, 0.04)
-    dst1 = cv2.cornerHarris(img1, 2, 3, 0.04)
-    dst0 = dst0 > 0.01 * dst0.max()
-    dst1 = dst1 > 0.01 * dst1.max()
-    y0, x0 = np.where(dst0)
-    y1, x1 = np.where(dst1)
   elif keypoint == 'all':
     x0, y0 = None, None
     x1, y1 = None, None

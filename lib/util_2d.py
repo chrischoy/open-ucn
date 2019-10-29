@@ -105,6 +105,23 @@ def normalize_keypoint(kp, K, center=None):
   return kp
 
 
+def build_extrinsic_matrix(R, t):
+  """Build extrinsic matrix
+
+  Args:
+    R (array): Rotation matrix of shape (3,3)
+    t (array): Translation vector of shape (3,)
+
+  Returns: 
+    array: extrinsic matrix
+
+  """
+  T = np.eye(4)
+  T[:3, :3] = R
+  T[:3, 3] = t
+  return T
+
+
 def compute_essential_matrix(T0, T1):
   """Compute essential matrix
 

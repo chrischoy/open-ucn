@@ -46,8 +46,6 @@ class CollationFunctionFactory:
 
   def __init__(self, config):
     self.config = config
-    self.use_8p = config.use_8p
-    self.quantization_size = config.quantization_size
 
   def __call__(self, batch_dicts):
     # Filter None
@@ -96,7 +94,6 @@ class Base2DDataset(torch.utils.data.Dataset):
     assert os.path.exists(config.data_dir_processed)
     self.source_dir = config.data_dir_raw
     self.target_dir = config.data_dir_processed
-    self.quantization_size = config.quantization_size
     self.files = []
 
     for k, v in self.DATA_FILES.items():
@@ -250,7 +247,6 @@ if __name__ == '__main__':
       self.data_dir_2d = '~/datasets/yfcc100m/preprocessed'
       self.obj_num_kp = 4000
       self.feature_extractor = 'sift'
-      self.quantization_size = 0.01
 
   config = Config()
 

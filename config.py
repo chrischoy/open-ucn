@@ -19,13 +19,13 @@ logging_arg = add_argument_group('Logging')
 logging_arg.add_argument('--out_dir', type=str, default='outputs')
 
 trainer_arg = add_argument_group('Trainer')
-trainer_arg.add_argument('--trainer', type=str, default='HardestContrastiveLossTrainer')
+trainer_arg.add_argument('--trainer', type=str, default='UCNHardestContrastiveLossTrainer')
 trainer_arg.add_argument('--save_freq_epoch', type=int, default=1)
-trainer_arg.add_argument('--batch_size', type=int, default=4)
+trainer_arg.add_argument('--batch_size', type=int, default=1)
 trainer_arg.add_argument('--val_batch_size', type=int, default=1)
 
 trainer_arg.add_argument('--num_pos_per_batch', type=int, default=1024)
-trainer_arg.add_argument('--num_hn_samples_per_batch', type=int, default=256)
+trainer_arg.add_argument('--num_hn_samples_per_batch', type=int, default=40000)
 
 trainer_arg.add_argument('--neg_thresh', type=float, default=1.4)
 trainer_arg.add_argument('--pos_thresh', type=float, default=0.1)
@@ -35,17 +35,17 @@ trainer_arg.add_argument('--val_phase', type=str, default="val")
 trainer_arg.add_argument('--test_phase', type=str, default="test")
 trainer_arg.add_argument('--stat_freq', type=int, default=40)
 trainer_arg.add_argument('--test_valid', type=str2bool, default=True)
-trainer_arg.add_argument('--nn_max_n', type=int, default=250)
+trainer_arg.add_argument('--nn_max_n', type=int, default=50)
 trainer_arg.add_argument('--val_max_iter', type=int, default=400)
 trainer_arg.add_argument('--train_max_iter', type=int, default=2000)
 trainer_arg.add_argument('--val_epoch_freq', type=int, default=1)
 
 # Network specific configurations
 net_arg = add_argument_group('Network')
-net_arg.add_argument('--model', type=str, default='SimpleNetBN2C')
-net_arg.add_argument('--model_n_out', type=int, default=32)
+net_arg.add_argument('--model', type=str, default='ResUNetBN2D2')
+net_arg.add_argument('--model_n_out', type=int, default=64)
 net_arg.add_argument('--use_color', type=str2bool, default=False)
-net_arg.add_argument('--normalize_feature', type=str2bool, default=False)
+net_arg.add_argument('--normalize_feature', type=str2bool, default=True)
 net_arg.add_argument('--dist_type', type=str, default='L2')
 net_arg.add_argument('--best_val_metric', type=str, default='hit_ratio')
 
@@ -94,10 +94,15 @@ data_arg.add_argument(
     default="sift",
     help="select feature extractor to use")
 data_arg.add_argument(
-    '--quantization_size',
+    '--inlier_threshold_pixel',
     type=float,
     default=0.01,
-    help="quantization size to discretize image coordinates")
+    help="Inlier threshold for data generation")
+data_arg.add_argument(
+    '--ucn_inlier_threshold_pixel',
+    type=float,
+    default=4,
+    help="Inlier threshold for hit test")
 data_arg.add_argument(
     '--use_ratio_test',
     type=str2bool,

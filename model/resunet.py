@@ -21,7 +21,6 @@ class ResUNet2(nn.Module):
                in_channels=1,
                out_channels=32,
                bn_momentum=0.1,
-               conv1_kernel_size=3,
                normalize_feature=False):
     nn.Module.__init__(self)
     CHANNELS = self.CHANNELS
@@ -34,9 +33,9 @@ class ResUNet2(nn.Module):
     self.conv1 = nn.Conv2d(
         in_channels=in_channels,
         out_channels=CHANNELS[1],
-        kernel_size=conv1_kernel_size,
+        kernel_size=5,
         stride=1,
-        padding=conv1_kernel_size // 2,
+        padding=2,
         dilation=1,
         bias=False)
     self.norm1 = get_norm(NORM_TYPE, CHANNELS[1], bn_momentum=bn_momentum)

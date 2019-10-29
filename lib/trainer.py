@@ -29,7 +29,6 @@ class Trainer:
     self.val_max_iter = config.val_max_iter
     self.val_epoch_freq = config.val_epoch_freq
 
-    self.best_val_comparator = config.best_val_comparator
     self.best_val_metric = config.best_val_metric
     self.best_val_epoch = -np.inf
     self.best_val = -np.inf
@@ -114,8 +113,7 @@ class Trainer:
         val_dict = self._valid_epoch()
         for k, v in val_dict.items():
           self.writer.add_scalar(f'val/{k}', v, epoch)
-        if (self.best_val_comparator == 'larger' and self.best_val < val_dict[self.best_val_metric]) or \
-            (self.best_val_comparator == 'smaller' and self.best_val > val_dict[self.best_val_metric]):
+        if self.best_val < val_dict[self.best_val_metric]:
           logging.info(
               f'Saving the best val model with {self.best_val_metric}: {val_dict[self.best_val_metric]}'
           )

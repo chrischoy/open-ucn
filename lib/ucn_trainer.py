@@ -54,7 +54,6 @@ class UCNTrainer(Trainer):
         num_feats,
         config.model_n_out,
         bn_momentum=config.bn_momentum,
-        conv1_kernel_size=config.conv1_kernel_size,
         normalize_feature=config.normalize_feature)
 
     if config.weights:
