@@ -7,8 +7,13 @@ from lib.eval import find_nn_gpu
 from util.file import ensure_dir
 
 
-def visualize_image_correspondence(img0, img1, F0, F1, filename, config):
-  mode = 'gpu-all'
+def visualize_image_correspondence(img0,
+                                   img1,
+                                   F0,
+                                   F1,
+                                   filename,
+                                   mode='gpu-all',
+                                   config=None):
   use_stability_test = True
   keypoint = 'sift'
   if keypoint == 'sift':
@@ -18,8 +23,8 @@ def visualize_image_correspondence(img0, img1, F0, F1, filename, config):
         0.01,  # Smaller more keypoints, default 0.04
         100  # larger more keypoints, default 10
     )
-    kp0 = sift.detect((img0 * 255).astype(np.uint8), None)
-    kp1 = sift.detect((img1 * 255).astype(np.uint8), None)
+    kp0 = sift.detect(img0, None)
+    kp1 = sift.detect(img1, None)
     print(len(kp0), len(kp1))
     xy_kp0 = np.floor(np.array([k.pt for k in kp0]).T)
     xy_kp1 = np.floor(np.array([k.pt for k in kp1]).T)
@@ -167,11 +172,11 @@ def visualize_image_correspondence(img0, img1, F0, F1, filename, config):
   fig = plt.gcf()
   fig.set_size_inches(9, 6)
 
-  ax0.imshow(img0 * 0.5, vmin=0, vmax=1, cmap='gray')
+  ax0.imshow(img0 * 0.5, vmin=0, vmax=255, cmap='gray')
   ax0.scatter(x=x0[mask], y=y0[mask], c=color, s=2, cmap="jet")
   ax0.axis('off')
 
-  ax1.imshow(img1 * 0.5, vmin=0, vmax=1, cmap='gray')
+  ax1.imshow(img1 * 0.5, vmin=0, vmax=255, cmap='gray')
   ax1.scatter(x=xs1[mask], y=ys1[mask], c=color, s=2, cmap="jet")
   ax1.axis('off')
 

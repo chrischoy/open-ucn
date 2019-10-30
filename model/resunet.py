@@ -33,9 +33,9 @@ class ResUNet2(nn.Module):
     self.conv1 = nn.Conv2d(
         in_channels=in_channels,
         out_channels=CHANNELS[1],
-        kernel_size=5,
+        kernel_size=3,
         stride=1,
-        padding=2,
+        padding=1,
         dilation=1,
         bias=False)
     self.norm1 = get_norm(NORM_TYPE, CHANNELS[1], bn_momentum=bn_momentum)

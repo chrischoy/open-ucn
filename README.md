@@ -1,14 +1,16 @@
 # Open Universal Correspondence Network
 
 This repository contains the pytorch implementation of Universal Correspondence
-Network, NIPS'16 for geometric correspondences.  As we are releasing this
+Network, NIPS'16 (UCN) for geometric correspondences.  As we are releasing this
 in 2019, we discarded the VGG network in favor of Residual Networks + U-Net.
 Similarly, we use the hardest contrastive loss proposed in the Fully
-Convolutional Geometric Features, ICCV'19 for the loss.
+Convolutional Geometric Features, ICCV'19 for fully convolutional metric
+learning. This allows using the O(~10k) points for hardest negative mining for
+all positives O(1k) per single image pair.
 
 For the ease of implementation and use, we do not use the convolutional spatial
 transformers (Rigid, SO(3), and TPS version of the deformable convolution)
-originally proposed in the UCN, NIPS'16.
+originally proposed in the UCN.
 
 
 ## Installation and Data Preprocessing
@@ -29,30 +31,31 @@ python -m scripts.gen_yfcc --source /path/to/download/yfcc --target /path/to/pre
 
 ## Testing the correspondences
 
+Following demo code will download the UCN and test it on a few image pairs.
+The output will be saved on `./ucn_outputs`.
 
-### Keypoints: SIFT keypoints or Harris Corners
+```
+python demo.py
+```
 
-#### Filtering Method 1: Reciprocity Test
-#### Filtering Method 2: Ratio Test
+### Output Image
 
+![h000](imgs/h000.png)
 
-### Dense Features:
-
-#### Filtering Method 1: Reciprocity Test
-#### Filtering Method 2: Ratio Test
-
-For dense features, it is most likely to find a feature that is close to the 1st nearest neighbor in the feature space. Thus the ratio test is not very discriminative.
+To see more visualizations, visit [Youtube link](https://youtu.be/FisWYwbEtno).
 
 
 ## Model Zoo
 
 Feel free to contribute to the model zoo by submitting your weights and the architecture.
 
-**WARNING**: The models are train only on YFCC dataset and are not guaranteed to achieve a great performance on datasets with different statistics.
+**WARNING**: The models are train only on the YFCC dataset and are not guaranteed to achieve the state-of-the-art performance on other datasets with different statistics.
 
 **WARNING**: The models assume a gray scale images in [0, 255] uint8, scaled to (x / 255 - 0.5).
 
-
+| Dataset  | Architecture | Download link |
+|:--------:|:------------:|:-------------:|
+| YFCC100M | ResUNetBN2D2 | [link](https://node1.chrischoy.org/data/publications/ucn/ResUNetBN2D2-YFCC100train-100epoch.pth) |
 
 
 ## Citing this work
@@ -85,6 +88,7 @@ Open-source Pytorch Implementation
 @misc{
     author = {Christopher Choy and Junha Lee},
     title = {Open Universal Correspondence Network},
+    howpublished={\url{https://github.com/chrischoy/open-ucn}},
     year = {2019},
 }
 ```
