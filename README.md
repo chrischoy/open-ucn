@@ -9,7 +9,7 @@ learning. This allows using the O(~10k) points for hardest negative mining for
 all positives O(1k) per single image pair.
 
 For the ease of implementation and use, we do not use the convolutional spatial
-transformers (Rigid, SO(3), and TPS version of the deformable convolution)
+transformers (Rigid, SO(2), and TPS version of the deformable convolution)
 originally proposed in the UCN.
 
 
@@ -29,7 +29,20 @@ bash scripts/download_yfcc.sh /path/to/download/yfcc
 python -m scripts.gen_yfcc --source /path/to/download/yfcc --target /path/to/preprocessed/yfcc
 ```
 
-## Testing the correspondences
+## Training the Open-UCN
+
+Modify the arguments accordingly.
+
+```
+python train.py \
+	--batch_size 1 \
+	--iter_size 2 \
+	--data_dir_raw /path/to/yfcc100m \
+	--data_dir_processed /path/to/preprocessed \
+	--num_hn_samples_per_batch 40000
+```
+
+## Testing the Open-UCN
 
 Following demo code will download the UCN and test it on a few image pairs.
 The output will be saved on `./ucn_outputs`.
@@ -49,9 +62,9 @@ To see more visualizations, visit [Youtube link](https://youtu.be/FisWYwbEtno).
 
 Feel free to contribute to the model zoo by submitting your weights and the architecture.
 
-**WARNING**: The models are train only on the YFCC dataset and are not guaranteed to achieve the state-of-the-art performance on other datasets with different statistics.
+**WARNING**: The models are train only on the YFCC dataset and are not guaranteed to work on other datasets with different statistics. (e.g., white background)
 
-**WARNING**: The models assume a gray scale images in [0, 255] uint8, scaled to (x / 255 - 0.5).
+**WARNING**: The models assume a gray scale image in [-0.5, 0.5], i.e. Given an uint8 image x in [0, 255], scale to (x / 255 - 0.5).
 
 | Dataset  | Architecture | Download link |
 |:--------:|:------------:|:-------------:|
