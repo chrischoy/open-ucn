@@ -60,7 +60,7 @@ Feel free to contribute to the model zoo by submitting your weights and the arch
 
 ## Citing this work
 
-The First Fully Convolutional Features for 2D Correspondences
+The Fully Convolutional Features for 2D Correspondences
 
 ```
 @incollection{UCN2016,
