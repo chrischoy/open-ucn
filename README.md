@@ -17,7 +17,7 @@ originally proposed in the UCN.
 
 ```
 # Follow the instruction on pytorch.org to install pytorch on your environment
-git clonge https://github.com/chrischoy/open-ucn.git
+git clone https://github.com/chrischoy/open-ucn.git
 cd open-ucn
 pip install -r requirements.txt
 ```
@@ -56,6 +56,14 @@ python demo.py
 ![h000](imgs/h000.png)
 
 To see more visualizations, visit [Youtube link](https://youtu.be/FisWYwbEtno).
+
+### Heuristic Filtering Methods
+
+A fully-convolutional model generates dense features. Similar to SIFT, it is crucial to filter out some false positive matches with heuristic methods. Here, we use `1. reciprocity test` and `2. stability test`.
+
+1. Reciprocity test simply checks whether the nearest neighbors of image 1 in image 2 fall back to the vicinity of the keypoints in image 1. The idea is that if the feature is discriminative, then it should form a cycle.
+
+2. Stability test selects features that are shifted randomly by 1 pixel. The idea is that if the features are discriminative, it should be invariant to translation noise.
 
 
 ## Model Zoo
