@@ -1,16 +1,29 @@
 # Open Universal Correspondence Network
 
 This repository contains the pytorch implementation of Universal Correspondence
-Network, NIPS'16 (UCN) for geometric correspondences.  As we are releasing this
-in 2019, we discarded the VGG network in favor of Residual Networks + U-Net.
+Network, NIPS'16 (UCN) for geometric correspondences with few more improvements.
+
+The UCN combines the metric learning (contrastive loss) with the
+fully-convolutional feature extraction for dense geometric and semantic
+correspondence.
+
+As we are releasing this in 2019, we discarded the VGG network originally used
+in the paper, in favor of Residual Networks + U-Net for even denser features
+and residual connections.
+
 Similarly, we use the hardest contrastive loss proposed in the Fully
 Convolutional Geometric Features, ICCV'19 for fully convolutional metric
-learning. This allows using the O(~10k) points for hardest negative mining for
-all positives O(1k) per single image pair.
+learning instead of the contrastive loss. This allows using the O(~10k) points
+for hardest negative mining for all positives O(1k) per single image pair.
 
-For the ease of implementation and use, we do not use the convolutional spatial
-transformers (Rigid, SO(2), and TPS version of the deformable convolution)
-originally proposed in the UCN.
+Note that the hardest contrastive loss does not require saving the intermediate
+features for negative mining. Once you find the hardest negatives, you can
+discard all intermediate computations. This is the crucial component making the
+metric learning of a large set of points possible.
+
+Finally, for the ease of implementation and use, we do not use the
+convolutional spatial transformers (Rigid, SO(2), and Thin-Plate-Spline (TPS)
+predecessor of the deformable convolution) originally proposed in the UCN.
 
 
 ## Installation and Data Preprocessing
