@@ -25,6 +25,10 @@ Finally, for the ease of implementation and use, we do not use the
 convolutional spatial transformers (Rigid, SO(2), and Thin-Plate-Spline (TPS)
 predecessor of the deformable convolution) originally proposed in the UCN.
 
+## Fully Convolutional Metric Learning
+
+The limitations of the patch based feature learning is that: First, extracting a small image patch limits the receptive field of the network but is also computationally inefficient since all intermediate representations are computed separately even for overlapping regions. Second, this allows end-to-end training as the selection process is delegated to the next stage in the pipeline. Third, limiting feature extraction to a keypoints results in lower spatial resolution for subsequent matching stages and can thus reduce registration accuracy. However, this can also results in more computation and increase complexity in discrete keypoint selection process.
+
 
 ## Installation and Data Preprocessing
 
