@@ -56,8 +56,18 @@ python train.py \
 	--iter_size 2 \
 	--data_dir_raw /path/to/yfcc100m \
 	--data_dir_processed /path/to/preprocessed \
-	--num_hn_samples_per_batch 40000
+	--num_hn_samples_per_batch 40000 \
+	--model_n_out 96
 ```
+
+One interesting phenomenon I found while training the network was that the
+training was very unstable with a smaller number of output features (i.e.
+feature size). For example, if I train the network to generate 64 dimensional
+features, the training only succeeds 1 out of 3 times. However, for 3D space, I
+could successfully push the dimension to 16 without a problem
+([link](https://github.com/chrischoy/FCGF)). This indicates
+the inherent difficulty of the 2D geometric correspondences.
+
 
 ## Testing the Open-UCN
 
