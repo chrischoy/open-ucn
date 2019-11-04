@@ -7,9 +7,10 @@ The UCN combines the metric learning (contrastive loss) with the
 fully-convolutional feature extraction for dense geometric and semantic
 correspondence.
 
-As we are releasing this in 2019, we discarded the VGG network originally used
-in the paper, in favor of Residual Networks + U-Net for even denser features
-and residual connections.
+As we are releasing this in 2019, we use a different network with pixel stride
+1 for high resolution features to push the boundary of the dense features and
+see how far the features would go. The networks are based on Residual Networks
++ U-Net crossing the encoder and decoder by default .
 
 Similarly, we use the hardest contrastive loss proposed in the Fully
 Convolutional Geometric Features, ICCV'19 for fully convolutional metric
@@ -74,6 +75,8 @@ the inherent difficulty of the 2D geometric correspondences.
 Following demo code will download the UCN and test it on a few image pairs.
 The output will be saved on `./ucn_outputs`.
 
+**Note**: The code requires GPU with VRAM > 4G by default and would use the most computation heavy method for visualization. There are various NN search methods and try out different modes if things don't work.
+
 ```
 python demo.py
 ```
@@ -97,9 +100,9 @@ A fully-convolutional model generates dense features. Similar to SIFT, it is cru
 
 Feel free to contribute to the model zoo by submitting your weights and the architecture.
 
-**WARNING**: The models are train only on the YFCC dataset and are not guaranteed to work on other datasets with different statistics. (e.g., white background)
+**Note**: The models are train only on the YFCC dataset and are not guaranteed to work on other datasets with different statistics. (e.g., white background)
 
-**WARNING**: The models assume a gray scale image in [-0.5, 0.5], i.e. Given an uint8 image x in [0, 255], scale to (x / 255 - 0.5).
+**Note**: The models assume a gray scale image in [-0.5, 0.5], i.e. Given an uint8 image x in [0, 255], scale to (x / 255 - 0.5).
 
 | Dataset  | Architecture | Download link |
 |:--------:|:------------:|:-------------:|
