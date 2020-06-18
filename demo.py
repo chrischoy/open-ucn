@@ -68,7 +68,7 @@ def to_normalized_torch(img, device):
 def demo(config):
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   root = './imgs'
-  checkpoint = torch.load(config.weights)
+  checkpoint = torch.load(config.weights, map_location=device)
   model = ResUNetBN2D2(1, 64, normalize_feature=True)
   model.load_state_dict(checkpoint['state_dict'])
   model.eval()
