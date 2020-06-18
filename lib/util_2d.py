@@ -23,7 +23,6 @@
 import warnings
 
 import cv2
-import cyvlfeat
 import numpy as np
 
 from util.file import loadh5
@@ -203,6 +202,7 @@ def get_feature_extractor(name, *args, **kwargs):
 
     extractor = sift_extractor
   elif name == 'dsift':
+    import cyvlfeat
 
     def dsift_extractor(img):
       kp, desc = cyvlfeat.sift.dsift(img, step=4, float_descriptors=True, fast=True)
