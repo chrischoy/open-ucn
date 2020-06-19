@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # MIT License
 #
 # Copyright (c) 2019 Chris Choy (chrischoy@ai.stanford.edu)
