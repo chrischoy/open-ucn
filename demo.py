@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # MIT License
 #
 # Copyright (c) 2019 Chris Choy (chrischoy@ai.stanford.edu)
@@ -68,7 +70,7 @@ def to_normalized_torch(img, device):
 def demo(config):
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   root = './imgs'
-  checkpoint = torch.load(config.weights)
+  checkpoint = torch.load(config.weights, map_location=device)
   model = ResUNetBN2D2(1, 64, normalize_feature=True)
   model.load_state_dict(checkpoint['state_dict'])
   model.eval()
@@ -79,6 +81,9 @@ def demo(config):
   for i, (img0_path, img1_path) in enumerate(itertools.combinations(imgs, 2)):
     img0 = prep_image(osp.join(root, img0_path))
     img1 = prep_image(osp.join(root, img1_path))
+    if config.scale is not None:
+      img0 = cv2.resize(img0, dsize=None, fx=config.scale, fy=config.scale)
+      img1 = cv2.resize(img1, dsize=None, fx=config.scale, fy=config.scale)
     F0 = model(to_normalized_torch(img0, device))
     F1 = model(to_normalized_torch(img1, device))
 
@@ -103,6 +108,9 @@ if __name__ == '__main__':
       default=4,
       type=int,
       help='Max pixel distance for reciprocity test.')
+  parser.add_argument('--scale',
+      type=float,
+      help="scale image dimension for network input")
 
   config = parser.parse_args()
 
